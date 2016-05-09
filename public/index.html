@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>React all the things !</title>
-	<link rel="stylesheet" href="/css/style.css">
+	<title>md-editor</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/codemirror.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/codemirror.js"></script>
+	<script src="js/markdown.js"></script>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/browser.min.js"></script>
+	<script src="js/marked.min.js"></script>
+	<script src="js/script.js"></script>
 </head>
 <body>
-	<h1>React</h1>
-	<div id="hello"></div>
-	<script src="/js/bundle.js"></script>
+	<div id="md-field"></div>
+	<div id="html-processed"></div>
 </body>
 </html>
