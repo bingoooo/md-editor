@@ -2,29 +2,39 @@
 
 console.log('linked : script.js');
 
-var mdEditor = React.createClass({
+var MDEditor = React.createClass({
+	displayName: 'MDEditor',
 	getInitialState: function(){
-		return {"data":{markdown: 'MD'}};
+		return {"data":{markdown: '', html: {__html: ''}}};
+	},
+	getLocalStorage: function(){
+		if(window.localStorage){
+			var md = window.localStorage.getItem('md')?window.localStorage.getItem('md'):'';
+			var mdField = document.getElementById('mdfield');
+			mdField.innerHTML = md;
+		}
 	},
 	componentDidMount: function(){
-		var mdField = document.getElementById('md');
-		var Markdown = CodeMirror.fromTextArea(mdField, {
-			value: "Markdown",
-			mode: "markdown"
-		});
-		var htmlField = document.getElementById('html-processed');
-		htmlField.innerHTML = 'Transformed to HTML "here"'
-
+		this.getLocalStorage();
+		this.transformMD();
 	},
-	rawmarkup: function(){
-		return {__html: this.state.markdown}
+	transformMD: function(){
+		var md = document.getElementById('mdfield');
+		var processed = marked(md.value, {sanitize: true});
+		this.setState({"data":{html:{__html: processed}}})
+	},
+	save: function(){
+		var save = document.getElementById('mdfield');
+		console.log('save ', save.value, '?');
+		window.localStorage.setItem('md', save.value);
 	},
 	render: function(){
 		var self = this;
 		return(
 			React.createElement('div', {className: 'md-editor'},
-				React.createElement('textarea', {className: 'md-field', placeholder: '# MD Style', cols: 30, rows: 10}),
-				React.createElement('div', {className: 'html-output', dangerouslySetInnerHTML: self.rawmarkup()})
+				React.createElement('textarea', {id: 'mdfield', className: 'mdfield', placeholder: '# MD Style', cols: 30, rows: 10, onChange: self.transformMD}),
+				React.createElement('div', {className: 'html-output', dangerouslySetInnerHTML: this.state.data.html}),
+				React.createElement('button', {className: 'save', onClick: self.save}, 'SAVE')
 			)
 		);
 	}
@@ -33,7 +43,7 @@ var mdEditor = React.createClass({
 
 window.onload = function(){
 	ReactDOM.render(
-		React.createElement(mdEditor),
+		React.createElement(MDEditor),
 		document.getElementById('md-field')
 	);
 ;};
