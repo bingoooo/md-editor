@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>md-editor</title>
+	<title>Markdown Editor</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/codemirror.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -11,6 +11,7 @@
 	<script src="js/react-dom.js"></script>
 	<script src="js/browser.min.js"></script>
 	<script src="js/marked.min.js"></script>
+	<script src="js/mymirror.js"></script>
 	<script src="js/script.js"></script>
 </head>
 <body>
