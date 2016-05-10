@@ -12,5 +12,14 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    return view('home');
+});
+$app->get('/api/get-files', function () use ($app) {
+	return 'get all files';
+});
+$app->get('/api/get-files/{id}', function ($id) use ($app) {
+	return $id;
+});
+$app->post('/api/send-files', function () use ($app) {
+	return 'record';
 });
