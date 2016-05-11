@@ -1,8 +1,62 @@
-body {
-  background-color: none; }
-
-.md-field {
-	
+html {
+	background: none;	
 }
 
+body {
+  background: linear-gradient(to bottom right, rgba(100, 100, 200, 0.4), white);
+  width: 95%;
+  margin: auto;
+}
+
+nav {
+	
+}
+nav ul li {
+	font-size: 2em;
+	display: inline-block;
+	margin: 1em 3em;
+}
+nav ul li::before {
+	content: ' | ';
+}nav ul li::after {
+	content: ' | ';
+}
+
+textarea {
+	resize: none;
+}
+
+.banner {
+	margin-top: 1em;
+	margin-bottom: 2em;
+	margin-left: 3em;
+}
+
+.md-field, .md-editor {
+	display: inline-block;
+	margin: auto;
+	width: 90%;
+}
+
+#filename-form {
+	width: 80%;
+	margin: auto;
+}
+
+#filename {
+	width: 80%;
+	margin-bottom: 1em;
+}
+
+#code, #mdfield, #textarea {
+	margin: auto;
+	width: 90%;
+	height: 14em;
+}
+
+#mirror, #processed, .html-output  {
+	margin: auto;
+	width: 90%;
+
+}
 /*# sourceMappingURL=style.css.map */
