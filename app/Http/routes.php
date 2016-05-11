@@ -11,9 +11,6 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return view('home');
-});
 $app->get('/api/get-files', function () use ($app) {
 	return 'get all files';
 });
@@ -22,4 +19,7 @@ $app->get('/api/get-files/{id}', function ($id) use ($app) {
 });
 $app->post('/api/send-files', function () use ($app) {
 	return 'record';
+});
+$app->get('/{path}', function ($path) use ($app) {
+    return view($path);
 });
