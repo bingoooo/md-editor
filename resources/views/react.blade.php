@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Markdown Editor : With React</title>
+	<title>React</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/semantic.css">
 	<link rel="stylesheet" href="css/codemirror.css">
@@ -12,6 +12,7 @@
 	<script src="js/react-dom.js"></script>
 	<script src="js/browser.min.js"></script>
 	<script src="js/marked.min.js"></script>
+	<script src="js/reactifiget.js"></script>
 	<script src="js/reactifi.js"></script>
 </head>
 <body>
@@ -23,6 +24,7 @@
 	</ul>
 </nav>
 <div class="banner"><h2>Using Rectal</h2></div>
+	<div id="files-field"></div>
 	<div id="md-field"></div>
 </body>
 </html>

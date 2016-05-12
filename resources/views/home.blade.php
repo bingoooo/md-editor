@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Markdown Editor : Code Mirror</title>
+	<title>Code Mirror</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/semantic.css">
 	<link rel="stylesheet" href="css/codemirror.css">
@@ -21,7 +21,7 @@
 	</nav>
 	<div class="banner"><h2>Using Gode My Roar</h2></div>
 	<form id="filename-form" action="" class="ui form">
-		<input class="ui input" id="filename" name="filename" type="text" placeholder="File name"><button class="ui button">SAVE</button>
+		<input class="ui input" id="filename" name="filename" type="text" placeholder="File name"><button id="save-button" class="ui button">SAVE</button>
 	</form>
 	<div id="md-field">
 		<div id="code"></div>
