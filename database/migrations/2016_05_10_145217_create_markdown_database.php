@@ -16,6 +16,7 @@ class CreateMarkdownDatabase extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('title');
             $table->text('markdown')->nullable();
         });
     }
