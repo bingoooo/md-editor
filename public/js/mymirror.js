@@ -20,6 +20,11 @@ var mdEditor = {
 			mode: 'markdown',
 		});
 		code.on('change', function(cm){
+			var saveButton = document.getElementById('save-button');
+			saveButton.classList.add('red');
+			saveButton.addEventListener('click', function(event){
+				event.preventDefault();
+			});
 			var lines = cm.doc.children[0].lines;
 			var out = '';
 			if(lines.length){
@@ -30,6 +35,9 @@ var mdEditor = {
 			var processed = marked(out, {sanitized: true});
 			self.output.innerHTML = processed;
 		});
+	},
+	save: function(event){
+		event.preventdefault();
 	}
 }
 
