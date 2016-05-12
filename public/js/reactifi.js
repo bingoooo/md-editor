@@ -7,7 +7,7 @@ console.log('linked : script.js');
 var MDEditor = React.createClass({
 	displayName: 'MDEditor',
 	getInitialState: function(){
-		return {"data":{markdown: '', html: {__html: ''}}};
+		return {"data":{markdown: '', html: {__html: ''}, files: []}};
 	},
 	getLocalStorage: function(){
 		if(window.localStorage){
@@ -16,10 +16,15 @@ var MDEditor = React.createClass({
 			mdField.innerHTML = md;
 		}
 	},
-	componentDidMount: function(){
-		this.getLocalStorage();
-		this.transformMD();
+	getFileNames: function(){
+		console.log('getting files...');
 	},
+	componentDidMount: function(){
+		// this.getFileNames();
+		// this.getLocalStorage();
+		// this.transformMD();
+	},
+	// partie buggée à résoudre
 	setCodeMirror: function(){
 		var textarea = document.getElementById('mdField');
 		
@@ -34,22 +39,53 @@ var MDEditor = React.createClass({
 		});
 	},
 	transformMD: function(){
+		document.getElementById('save-button').classList.add('red');
 		var md = document.getElementById('mdfield');
 		var processed = marked(md.value, {sanitize: true});
 		this.setState({"data":{html:{__html: processed}}})
 	},
-	save: function(){
+	save: function(event){
+		event.preventDefault();
 		var save = document.getElementById('mdfield');
-		console.log('save ', save.value, '?');
-		window.localStorage.setItem('md', save.value);
+		var filename = document.getElementById('filename').value;
+		console.log('save :', filename, save.value, '?');
+		document.getElementById('save-button').classList.remove('red');
+		// window.localStorage.setItem('md', save.value);
+		window.alert(filename + ' have been saved');
+	},
+	send: function(event){
+		event.preventDefault();
+		console.log('saving to server...');
+		var name = document.getElementById('filename').value;
+		console.log('File :', name);
+		var md =  document.getElementById('mdfield').value;
+		var data = new FormData();
+		data.append('title', name);
+		data.append('markdown', md);
+		console.log('Content :', md);
+		fetch('/api/send-file',{
+			method: 'POST',
+			body: data
+		})
+		.then(function(response){
+			if(response.headers.get('Existing-file')) alert('File already exists and overwrited !!!');
+			response.json().then(function(json){console.log('Json', json);});
+		})
+		.catch(function(err){
+			console.log('Error', err);
+		})
+		.then(function(){console.log('done');});
 	},
 	render: function(){
 		var self = this;
 		return(
 			React.createElement('div', {className: 'md-editor'},
-				React.createElement('textarea', {id: 'mdfield', className: 'mdfield', placeholder: '# MD Style', cols: 30, rows: 10, onChange: self.transformMD}),
-				React.createElement('div', {className: 'html-output', dangerouslySetInnerHTML: this.state.data.html}),
-				React.createElement('button', {className: 'save', onClick: self.save}, 'SAVE')
+				React.createElement('form', {id: 'form', name: 'form',className: 'ui form'},
+					React.createElement('input', {id: 'filename', name: 'title', className: 'ui input', placeholder: 'File Name', required: true}),
+					React.createElement('button', {id: 'save-button', className: 'ui button save', onClick: self.send}, 'SAVE'),
+					React.createElement('textarea', {id: 'mdfield', name: 'markdown', className: 'mdfield', placeholder: '# MD Style', cols: 30, rows: 10, required: true, onChange: self.transformMD})
+				),
+				React.createElement('div', {className: 'html-output', dangerouslySetInnerHTML: this.state.data.html})
 			)
 		);
 	}
@@ -57,6 +93,10 @@ var MDEditor = React.createClass({
 
 window.onload = function(){
 	console.log('window loaded');
+	ReactDOM.render(
+		React.createElement(GetFiles),
+		document.getElementById('files-field')
+	);
 	ReactDOM.render(
 		React.createElement(MDEditor),
 		document.getElementById('md-field')
