@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background: linear-gradient(to bottom right, rgba(100, 100, 200, 0.4), white);
+  background: linear-gradient(to bottom, white, rgba(100, 100, 200, 0.4), white);
   width: 95%;
   margin: auto;
 }
@@ -49,12 +49,14 @@ textarea {
 }
 
 #code, #mdfield, #textarea {
+	box-shadow: 10px 5px 5px grey;
 	margin: auto;
 	width: 90%;
-	height: 14em;
+	height: 21em;
 }
 
 #mirror, #processed, .html-output  {
+	padding-top: 1em;
 	margin: auto;
 	width: 90%;
 
