@@ -11,15 +11,9 @@
 |
 */
 
-$app->get('/api/get-files', function () use ($app) {
-	return 'get all files';
-});
-$app->get('/api/get-files/{id}', function ($id) use ($app) {
-	return $id;
-});
-$app->post('/api/send-files', function () use ($app) {
-	return 'record';
-});
+$app->get('/api/get-files', 'Controller@getFiles');
+$app->get('/api/get-files/{id}', 'Controller@getFile');
+$app->post('/api/send-file', 'Controller@postFile');
 $app->get('/{path}', function ($path) use ($app) {
     return view($path);
 });
